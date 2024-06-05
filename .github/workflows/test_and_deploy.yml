@@ -12,4 +12,45 @@ on:
           - déploiement
           - test add
           - test all
-        dfault: "déploiement"
+        default: "déploiement"
+
+jobs:
+  test_add:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.5
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: 16
+      - name: setup ci
+        run: npm ci
+      - name: test
+        run: npm run test_add
+
+  test_sub:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.5
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: 16
+      - name: setup ci
+        run: npm ci
+      - name: test
+        run: npm run test_sub
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deply
+        run: echo "déploiement"
+
+  notify_failure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: notify_failure
+        run: echo "Le déploiement a échoué"
